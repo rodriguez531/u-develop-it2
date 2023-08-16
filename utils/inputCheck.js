@@ -2,7 +2,8 @@
 // e.g., inputCheck(object, 'prop1', 'prop2', 'etc')
 
 module.exports = function(obj, ...props) {
-    const errors = [];
+  const errors = inputCheck(req.body, 'party_id');
+
   
     props.forEach((prop) => {
       // if property is blank or doesn't exist, add to errors array
@@ -11,10 +12,9 @@ module.exports = function(obj, ...props) {
       }
     });
   
-    if (errors.length) {
-      return {
-        error: errors.join(' ')
-      };
+    if (errors) {
+      res.status(400).json({ error: errors });
+      return;
     }
     
     return null;
